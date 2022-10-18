@@ -1,0 +1,7 @@
+black @ git+https://github.com/psf/black@b60b85b234d6a575f636d0a125478115f993c90c
+click==8.1.3
+mypy-extensions==0.4.3
+pathspec==0.10.1
+platformdirs==2.5.2
+simpleai==0.8.3
+tomli==2.0.1
