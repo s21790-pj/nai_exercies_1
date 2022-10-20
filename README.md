@@ -1,1 +1,9 @@
-# nai_exercies_1
+# Bulls and Cows
+### Script responsible for solving the problem from the game "Bulls and Cows" by using the simpleAI library
+
+Before running the script, install the required libraries included in the 'requirements.txt' file
+```commandline
+pip install -r requirements.txt
+```
+To change the answer to the task, assign a 4-digit number to the GOAL variable in the script in string form
+`GOAL='xxxx'`
