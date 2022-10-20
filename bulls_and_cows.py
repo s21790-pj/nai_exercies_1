@@ -9,8 +9,8 @@ GOAL = "1234"
 
 class BullsAndCowsProblem(SearchProblem):
     # Initialization of bull score and cow score tables
-    bulls = ['x' for x in range(len(GOAL))]
-    cows = ['']
+    bulls = ["x" for x in range(len(GOAL))]
+    cows = [""]
 
     def actions(self, state: str) -> List:
         """
@@ -21,15 +21,15 @@ class BullsAndCowsProblem(SearchProblem):
         :param state: Current answer in the form of a 4-digit number written as a string
         :return: One-element array, containing the missing drawn numbers in string form
         """
-        missing_numbers = ''
+        missing_numbers = ""
         if state != GOAL:
             for num in self.bulls:
                 if num in self.cows:
                     self.cows.pop(self.cows.index(num))
-            if self.cows[0] != '':
-                temp_cows = ''.join(self.cows)
+            if self.cows[0] != "":
+                temp_cows = "".join(self.cows)
                 self.cows[0] = temp_cows
-                for missing_number in range(self.bulls.count('x') - len(temp_cows)):
+                for missing_number in range(self.bulls.count("x") - len(temp_cows)):
                     chosen_number = str(random.randint(0, 9))
                     while (chosen_number in self.bulls) or (chosen_number in temp_cows):
                         chosen_number = str(random.randint(0, 9))
@@ -38,10 +38,12 @@ class BullsAndCowsProblem(SearchProblem):
                 self.cows[0] = temp_cows
                 return self.cows
             else:
-                missing_numbers = ''
-                for it in range((self.bulls.count('x'))):
+                missing_numbers = ""
+                for it in range((self.bulls.count("x"))):
                     chosen_number = str(random.randint(0, 9))
-                    while chosen_number in self.bulls or chosen_number in missing_numbers:
+                    while (
+                        chosen_number in self.bulls or chosen_number in missing_numbers
+                    ):
                         chosen_number = str(random.randint(0, 9))
                     missing_numbers += chosen_number
                 return [missing_numbers]
@@ -57,14 +59,14 @@ class BullsAndCowsProblem(SearchProblem):
         state = self.bulls
         temp_cows = list(action)
 
-        for it in range((self.bulls.count('x'))):
+        for it in range((self.bulls.count("x"))):
             chosen_number = random.choice(temp_cows)
             temp_cows.pop(temp_cows.index(chosen_number))
-            self.bulls[self.bulls.index('x')] = chosen_number
+            self.bulls[self.bulls.index("x")] = chosen_number
 
         self.cows = temp_cows
         state = self.bulls
-        return ''.join(state)
+        return "".join(state)
 
     def is_goal(self, state: str) -> bool:
         """
@@ -83,14 +85,14 @@ class BullsAndCowsProblem(SearchProblem):
         :param state: Current answer in the form of a 4-digit number written as a string
         :return: Number of incorrect digits in the current answer
         """
-        self.cows = ['']
-        result = ''
+        self.cows = [""]
+        result = ""
 
         for it in range(len(GOAL)):
             if state[it] == GOAL[it]:
                 self.bulls[it] = state[it]
             else:
-                self.bulls[it] = 'x'
+                self.bulls[it] = "x"
 
         for it in range(len(GOAL)):
             if (state[it] in GOAL) and (state[it] not in self.bulls):
@@ -98,7 +100,7 @@ class BullsAndCowsProblem(SearchProblem):
             self.cows[0] = result
 
         state = self.bulls
-        wrong = sum([0 if state[i] != 'x' else 1 for i in range(len(state))])
+        wrong = sum([0 if state[i] != "x" else 1 for i in range(len(state))])
         return wrong
 
 
